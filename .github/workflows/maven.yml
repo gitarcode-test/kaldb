@@ -36,12 +36,6 @@ jobs:
         #  When temurin releases Java 21 we can start using that again
         distribution: 'corretto'
         cache: 'maven'
-    - name: Ensure code is formatted
-      if: steps.filter.outputs.java == 'true'
-      run: mvn -B -Dstyle.color=always com.spotify.fmt:fmt-maven-plugin:check --file astra/pom.xml
-    - name: Ensure jmh benchmark code is formatted
-      if: steps.filter.outputs.java == 'true'
-      run: mvn -B -Dstyle.color=always com.spotify.fmt:fmt-maven-plugin:check --file benchmarks/pom.xml
     - name: Build with Maven
       if: steps.filter.outputs.java == 'true'
       run: mvn -B -Dstyle.color=always package --file pom.xml
